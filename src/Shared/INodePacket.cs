@@ -203,29 +203,36 @@ namespace Microsoft.Build.BackEnd
         /// </summary>
         ProcessReport,
 
+        // Server command packets with hardcoded values that don't have the 6th bit set.
+        // It is reserved for ExtendedHeaderFlag (0x40 = 0100 0000).
+        // Do not set it for any other packet types to avoid conflicts.
+        #region ServerNode enums 
+
         /// <summary>
         /// Command in form of MSBuild command line for server node - MSBuild Server.
-        /// Keep this enum value constant intact as this is part of contract with dotnet CLI
+        /// Keep this enum value constant intact as this is part of contract with dotnet CLI.
         /// </summary>
-        ServerNodeBuildCommand = 0xF0,
+        ServerNodeBuildCommand = 0x90, // Binary: 10010000
 
         /// <summary>
         /// Response from server node command
         /// Keep this enum value constant intact as this is part of contract with dotnet CLI
         /// </summary>
-        ServerNodeBuildResult = 0xF1,
+        ServerNodeBuildResult = 0x91, // Binary: 10010001
 
         /// <summary>
         /// Info about server console activity.
         /// Keep this enum value constant intact as this is part of contract with dotnet CLI
         /// </summary>
-        ServerNodeConsoleWrite = 0xF2,
+        ServerNodeConsoleWrite = 0x92, // Binary: 10010010
 
         /// <summary>
         /// Command to cancel ongoing build.
         /// Keep this enum value constant intact as this is part of contract with dotnet CLI
         /// </summary>
-        ServerNodeBuildCancel = 0xF3,
+        ServerNodeBuildCancel = 0x93, // Binary: 10010011
+
+        #endregion
     }
     #endregion
 
@@ -249,16 +256,17 @@ namespace Microsoft.Build.BackEnd
 
     internal static class PacketTypeExtensions
     {
+        public const byte PacketVersion = 1;
+
         private const byte ExtendedHeaderFlag = 0x40; // Bit 6 indicates extended header with version
 
         /// <summary>
         /// Determines if a packet has an extended header by checking if the extended header flag is set.
-        /// The secondary check with (byte)NodePacketType.ServerNodeBuildCommand ensures special server command packets (0xF0-0xFF) 
         /// are never interpreted as having extended headers, even if they happen to have the flag bit set.
         /// </summary>
         /// <param name="rawType">The raw packet type byte.</param>
         /// <returns>True if the packet has an extended header, false otherwise</returns>
-        public static bool HasExtendedHeader(byte rawType) => (rawType & ExtendedHeaderFlag) != 0 && (rawType < (byte)NodePacketType.ServerNodeBuildCommand);
+        public static bool HasExtendedHeader(byte rawType) => (rawType & ExtendedHeaderFlag) != 0;
 
         // Get base type, stripping the extended header flag
         public static NodePacketType GetNodePacketType(byte rawType) => (NodePacketType)(rawType & ~ExtendedHeaderFlag);
@@ -271,18 +279,5 @@ namespace Microsoft.Build.BackEnd
 
         // Write extended header with version
         public static void WriteVersion(Stream stream, byte version) => stream.WriteByte(version);
-    }
-
-    internal static class PacketVersionManager
-    {
-        private static readonly Dictionary<NodePacketType, byte> _currentPacketVersions = new Dictionary<NodePacketType, byte>
-        {
-            { NodePacketType.TaskHostConfiguration, 1 },
-        };
-
-        // Get current version for a packet type
-        public static byte GetCurrentVersion(NodePacketType type) => _currentPacketVersions.TryGetValue(type, out byte version) ? version : (byte)1;
-
-        public static bool SupportsVersioning(NodePacketType type) => _currentPacketVersions.ContainsKey(type);
     }
 }
