@@ -73,7 +73,7 @@ extends:
           displayName: Install the tool nbgv
           inputs:
             script: dotnet tool install nbgv -g
-          workingDirectory: $(Build.SourcesDirectory)\..
+            workingDirectory: $(Build.SourcesDirectory)\..
 
         - script: nbgv cloud
           displayName: Set Version
