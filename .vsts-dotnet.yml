@@ -69,15 +69,11 @@ extends:
             filename: set
           condition: always()
 
-        - powershell: |
-            &powershell -NoProfile -ExecutionPolicy unrestricted -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; &([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://dot.net/v1/dotnet-install.ps1')))"
-          displayName: Install latest .NET
-
-        - script: dotnet --info
-          displayName: Display dotnet info
-
-        - script: dotnet tool install nbgv -g --source "https://api.nuget.org/v3/index.json"
+        - task: CmdLine@2
           displayName: Install the tool nbgv
+          inputs:
+            script: dotnet tool install nbgv -g
+          workingDirectory: $(Build.SourcesDirectory)\..
 
         - script: nbgv cloud
           displayName: Set Version
