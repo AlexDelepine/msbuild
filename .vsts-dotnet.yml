@@ -69,11 +69,10 @@ extends:
             filename: set
           condition: always()
 
-        - task: CmdLine@1
-          displayName: Bogus build to have nerdbank.GitVersioning set the version for the swix plugin
-          inputs:
-            filename: '$(comspec)'
-            arguments: '/c "call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsDevCmd.bat" & msbuild /restore $(Build.Repository.LocalPath)\build\SetMicrobuildVersion\SetMicrobuildVersion.csproj"'
+        - script: |
+              dotnet tool install -g nbgv
+              nbgv cloud
+          displayName: Set Version
 
         - task: CmdLine@1
           displayName: restore build number
