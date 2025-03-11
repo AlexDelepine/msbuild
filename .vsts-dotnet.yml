@@ -69,17 +69,12 @@ extends:
             filename: set
           condition: always()
 
-        - script: |
-            dotnet tool -h
-            dotnet tool install -h
-          displayName: Display dotnet tool usage
-
         - task: DotNetCoreCLI@2  
           displayName: Install NBGV tool
           inputs:
             command: custom
             custom: tool
-            arguments: install -g nbgv
+            arguments: install nbgv --tool-path . --source "https://api.nuget.org/v3/index.json"
 
         - script: nbgv cloud
           displayName: Set Version
