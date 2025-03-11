@@ -69,6 +69,12 @@ extends:
             filename: set
           condition: always()
 
+        - script: |
+            dotnet -h
+            dotnet --info
+            dotnet install -h
+          displayName: Display dotnet info
+
         - task: DotNetCoreCLI@2  
           displayName: Install NBGV tool
           inputs:
