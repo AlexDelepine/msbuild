@@ -69,15 +69,19 @@ extends:
             filename: set
           condition: always()
 
-        - task: DotNetCoreCLI@2  
-          displayName: Install NBGV tool
-          inputs:
-            command: custom
-            custom: tool
-            arguments: install nbgv --tool-path . --add-source "https://api.nuget.org/v3/index.json"
+        - powershell: |
+            &powershell -NoProfile -ExecutionPolicy unrestricted -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; &([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://dot.net/v1/dotnet-install.ps1')))"
+          displayName: Install latest .NET
+
+        - script: dotnet --info
+          displayName: Display dotnet info
+
+        - script: dotnet tool install nbgv -g --source "https://api.nuget.org/v3/index.json"
+          displayName: Install the tool nbgv
 
         - script: nbgv cloud
           displayName: Set Version
+          condition: always()
 
         - task: CmdLine@1
           displayName: restore build number
