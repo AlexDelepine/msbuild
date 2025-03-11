@@ -70,10 +70,8 @@ extends:
           condition: always()
 
         - script: |
-            dotnet -h
-            dotnet --info
-            dotnet install -h
-          displayName: Display dotnet info
+            dotnet tool -h
+          displayName: Display dotnet tool usage
 
         - task: DotNetCoreCLI@2  
           displayName: Install NBGV tool
