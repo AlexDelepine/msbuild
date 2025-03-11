@@ -71,6 +71,7 @@ extends:
 
         - script: |
             dotnet tool -h
+            dotnet tool install -h
           displayName: Display dotnet tool usage
 
         - task: DotNetCoreCLI@2  
