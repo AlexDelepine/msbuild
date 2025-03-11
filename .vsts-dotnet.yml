@@ -74,7 +74,7 @@ extends:
           inputs:
             command: custom
             custom: tool
-            arguments: install nbgv --tool-path . --source "https://api.nuget.org/v3/index.json"
+            arguments: install nbgv --tool-path . --add-source "https://api.nuget.org/v3/index.json"
 
         - script: nbgv cloud
           displayName: Set Version
