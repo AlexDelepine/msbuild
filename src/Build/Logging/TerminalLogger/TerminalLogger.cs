@@ -994,6 +994,7 @@ public sealed partial class TerminalLogger : INodeLogger
             if (IsAuthProviderMessage(e.Message))
             {
                 RenderImmediateMessage(FormatWarningMessage(e, Indentation));
+                return;
             }
             else if (Verbosity >= LoggerVerbosity.Quiet)
             {
