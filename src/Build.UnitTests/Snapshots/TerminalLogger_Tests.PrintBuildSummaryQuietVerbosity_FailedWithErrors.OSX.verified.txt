@@ -1,2 +1,2 @@
-﻿The plugin credential provider could not acquire credentials.Authentication may require manual action. Consider re-running the command with --interactive for dotnet, /p:NuGetInteractive="true" for MSBuild or removing the -NonInteractive switch for NuGet
-directory/\x1b[1mfile\x1b[m(1,2,3,4): \x1b[31;1merror\x1b[m \x1b[31;1mAA0000\x1b[m: Error!
+The plugin credential provider could not acquire credentials.Authentication may require manual action. Consider re-running the command with --interactive for `dotnet`, /p:NuGetInteractive="true" for MSBuild or removing the -NonInteractive switch for `NuGet`
+directory/[1mfile[m(1,2,3,4): [31;1merror[m [31;1mAA0000[m: Error!
