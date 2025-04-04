@@ -212,15 +212,15 @@ folder InstallDir:\MSBuild\Current\Bin\amd64
   file source=$(X86BinPath)Microsoft.Build.Tasks.Core.dll
   file source=$(X86BinPath)Microsoft.Build.Utilities.Core.dll
   file source=$(X86BinPath)System.Buffers.dll
-  file source=$(X86BinPath)System.Formats.Nrbf.dll
-  file source=$(X86BinPath)System.IO.Pipelines.dll
+  file source=$(X86BinPath)System.Formats.Nrbf.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.IO.Pipelines.dll vs.file.ngenArchitecture=all
   file source=$(X86BinPath)System.Memory.dll
   file source=$(X86BinPath)System.Reflection.Metadata.dll
   file source=$(X86BinPath)System.Reflection.MetadataLoadContext.dll
-  file source=$(X86BinPath)System.Text.Json.dll vs.file.ngenArchitecture=all
-  file source=$(X86BinPath)Microsoft.Bcl.AsyncInterfaces.dll vs.file.ngenArchitecture=all
-  file source=$(X86BinPath)Microsoft.IO.Redist.dll vs.file.ngenArchitecture=all
-  file source=$(X86BinPath)System.Text.Encodings.Web.dll vs.file.ngenArchitecture=all
+  file source=$(X86BinPath)System.Text.Json.dll
+  file source=$(X86BinPath)Microsoft.Bcl.AsyncInterfaces.dll
+  file source=$(X86BinPath)Microsoft.IO.Redist.dll
+  file source=$(X86BinPath)System.Text.Encodings.Web.dll
   file source=$(X86BinPath)System.Threading.Tasks.Extensions.dll vs.file.ngenArchitecture=all
   file source=$(X86BinPath)System.ValueTuple.dll
   file source=$(X86BinPath)System.Numerics.Vectors.dll
