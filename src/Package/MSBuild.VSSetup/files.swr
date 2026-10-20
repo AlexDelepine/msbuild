@@ -32,7 +32,7 @@ folder InstallDir:\MSBuild\Current\Bin
   file source=$(X86BinPath)Microsoft.Build.Utilities.Core.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all vs.file.ngenPriority=2
   file source=$(X86BinPath)Microsoft.IO.Redist.dll vs.file.ngenApplications="[installDir]\Common7\IDE\vsn.exe" vs.file.ngenApplications="[installDir]\MSBuild\Current\Bin\MSBuild.exe" vs.file.ngenArchitecture=all vs.file.ngenPriority=2
   file source=$(X86BinPath)MSBuild.exe vs.file.ngenArchitecture=x86 vs.file.ngenPriority=2
-  file MSBuild.exe.config.template source=$(X86BinPath)MSBuild.exe.config vs.file.useGroupConfig="devenv" vs.file.overwriteBindingRedirects=yes
+  file MSBuild.exe.config.template source=$(X86BinPath)MSBuild.exe.config vs.file.useGroupConfig="devenv" vs.file.overwriteBindingRedirects=yes vs.file.useAbsoluteCodeBase=yes
   file source=$(CoordinatorBinPath)MSBuild.Coordinator.exe
   file MSBuild.Coordinator.exe.config.template source=$(CoordinatorBinPath)MSBuild.Coordinator.exe.config vs.file.useGroupConfig="devenv" vs.file.overwriteBindingRedirects=yes
   file source=$(TaskHostBinPath)MSBuildTaskHost.exe
@@ -216,7 +216,7 @@ folder InstallDir:\MSBuild\Current\Bin\zh-Hant
 
 folder InstallDir:\MSBuild\Current\Bin\amd64
   file source=$(X64BinPath)MSBuild.exe vs.file.ngenArchitecture=x64
-  file MSBuild.exe.config.template source=$(X64BinPath)MSBuild.exe.config vs.file.useGroupConfig="devenv" vs.file.overwriteBindingRedirects=yes
+  file MSBuild.exe.config.template source=$(X64BinPath)MSBuild.exe.config vs.file.useGroupConfig="devenv" vs.file.overwriteBindingRedirects=yes vs.file.useAbsoluteCodeBase=yes
   file source=$(CoordinatorX64BinPath)MSBuild.Coordinator.exe vs.file.ngenArchitecture=x64 vs.file.ngenPriority=3
   file MSBuild.Coordinator.exe.config.template source=$(CoordinatorX64BinPath)MSBuild.Coordinator.exe.config vs.file.useGroupConfig="devenv" vs.file.overwriteBindingRedirects=yes
 
